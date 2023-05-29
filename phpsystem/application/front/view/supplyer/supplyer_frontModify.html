@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+  <TITLE>修改供应商信息</TITLE>
+  <link href="__PUBLIC__/plugins/bootstrap.css" rel="stylesheet">
+  <link href="__PUBLIC__/plugins/bootstrap-dashen.css" rel="stylesheet">
+  <link href="__PUBLIC__/plugins/font-awesome.css" rel="stylesheet">
+  <link href="__PUBLIC__/plugins/animate.css" rel="stylesheet"> 
+</head>
+<body style="margin-top:70px;"> 
+<div class="container">
+{include file="common/header" /}
+	<div class="col-md-9 wow fadeInLeft">
+	<ul class="breadcrumb">
+  		<li><a href="__PUBLIC__/index.php">首页</a></li>
+  		<li class="active">供应商信息修改</li>
+	</ul>
+		<div class="row"> 
+      	<form class="form-horizontal" name="supplyerEditForm" id="supplyerEditForm" enctype="multipart/form-data" method="post"  class="mar_t15">
+		  <div class="form-group">
+			 <label for="supplyer_supplyerId_edit" class="col-md-3 text-right">供应商编号:</label>
+			 <div class="col-md-9"> 
+			 	<input type="text" id="supplyer_supplyerId_edit" name="supplyer_supplyerId" class="form-control" placeholder="请输入供应商编号" readOnly>
+			 </div>
+		  </div> 
+		  <div class="form-group">
+		  	 <label for="supplyer_supplyerName_edit" class="col-md-3 text-right">供应商名称:</label>
+		  	 <div class="col-md-9">
+			    <input type="text" id="supplyer_supplyerName_edit" name="supplyer_supplyerName" class="form-control" placeholder="请输入供应商名称">
+			 </div>
+		  </div>
+		  <div class="form-group">
+		  	 <label for="supplyer_telephone_edit" class="col-md-3 text-right">供应商电话:</label>
+		  	 <div class="col-md-9">
+			    <input type="text" id="supplyer_telephone_edit" name="supplyer_telephone" class="form-control" placeholder="请输入供应商电话">
+			 </div>
+		  </div>
+		  <div class="form-group">
+		  	 <label for="supplyer_personName_edit" class="col-md-3 text-right">联系人:</label>
+		  	 <div class="col-md-9">
+			    <input type="text" id="supplyer_personName_edit" name="supplyer_personName" class="form-control" placeholder="请输入联系人">
+			 </div>
+		  </div>
+		  <div class="form-group">
+		  	 <label for="supplyer_address_edit" class="col-md-3 text-right">供应商地址:</label>
+		  	 <div class="col-md-9">
+			    <input type="text" id="supplyer_address_edit" name="supplyer_address" class="form-control" placeholder="请输入供应商地址">
+			 </div>
+		  </div>
+			  <div class="form-group">
+			  	<span class="col-md-3""></span>
+			  	<span onclick="ajaxSupplyerModify();" class="btn btn-primary bottom5 top5">修改</span>
+			  </div>
+		</form> 
+	    <style>#supplyerEditForm .form-group {margin-bottom:5px;}  </style>
+      </div>
+   </div>
+</div>
+
+
+{include file="common/footer" /}
+<script src="__PUBLIC__/plugins/jquery.min.js"></script>
+<script src="__PUBLIC__/plugins/bootstrap.js"></script>
+<script src="__PUBLIC__/plugins/wow.min.js"></script>
+<script src="__PUBLIC__/plugins/bootstrap-datetimepicker.min.js"></script>
+<script src="__PUBLIC__/plugins/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jsdate.js"></script>
+<script>
+/*弹出修改供应商界面并初始化数据*/
+function supplyerEdit(supplyerId) {
+	$.ajax({
+		url :  "{:url('Supplyer/update')}?supplyerId=" + supplyerId,
+		type : "get",
+		dataType: "json",
+		success : function (supplyer, response, status) {
+			if (supplyer) {
+				$("#supplyer_supplyerId_edit").val(supplyer.supplyerId);
+				$("#supplyer_supplyerName_edit").val(supplyer.supplyerName);
+				$("#supplyer_telephone_edit").val(supplyer.telephone);
+				$("#supplyer_personName_edit").val(supplyer.personName);
+				$("#supplyer_address_edit").val(supplyer.address);
+			} else {
+				alert("获取信息失败！");
+			}
+		}
+	});
+}
+
+/*ajax方式提交供应商信息表单给服务器端修改*/
+function ajaxSupplyerModify() {
+	$.ajax({
+		url :  "{:url('Supplyer/update')}",
+		type : "post",
+		dataType: "json",
+		data: new FormData($("#supplyerEditForm")[0]),
+		success : function (obj, response, status) {
+            if(obj.success){
+                alert("信息修改成功！");
+                location.reload(true);
+                $("#supplyerQueryForm").submit();
+            }else{
+                alert(obj.message);
+            } 
+		},
+		processData: false,
+		contentType: false,
+	});
+}
+
+$(function(){
+        /*小屏幕导航点击关闭菜单*/
+        $('.navbar-collapse a').click(function(){
+            $('.navbar-collapse').collapse('hide');
+        });
+        new WOW().init();
+    supplyerEdit("{$supplyerId}");
+ })
+ </script> 
+</body>
+</html>
+

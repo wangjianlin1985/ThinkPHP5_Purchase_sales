@@ -1,0 +1,66 @@
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/backcss/supplyer.css" />
+
+<div id="supplyer_manage"></div>
+<div id="supplyer_manage_tool" style="padding:5px;">
+	<div style="margin-bottom:5px;">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-edit-new" plain="true" onclick="supplyer_manage_tool.edit();">修改</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-delete-new" plain="true" onclick="supplyer_manage_tool.remove();">删除</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-reload" plain="true"  onclick="supplyer_manage_tool.reload();">刷新</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-redo" plain="true" onclick="supplyer_manage_tool.redo();">取消选择</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-export" plain="true" onclick="supplyer_manage_tool.exportExcel();">导出到excel</a>
+	</div>
+	<div style="padding:0 0 0 7px;color:#333;">
+		<form id="supplyerQueryForm" method="post">
+			供应商名称：<input type="text" class="textbox" id="supplyerName" name="supplyerName" style="width:110px" />
+			<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="supplyer_manage_tool.search();">查询</a>
+		</form>	
+	</div>
+</div>
+
+<div id="supplyerEditDiv">
+	<form id="supplyerEditForm" enctype="multipart/form-data"  method="post">
+		<div>
+			<span class="label">供应商编号:</span>
+			<span class="inputControl">
+				<input class="textbox" type="text" id="supplyer_supplyerId_edit" name="supplyer_supplyerId" style="width:200px" />
+			</span>
+		</div>
+		<div>
+			<span class="label">供应商名称:</span>
+			<span class="inputControl">
+				<input class="textbox" type="text" id="supplyer_supplyerName_edit" name="supplyer_supplyerName" style="width:200px" />
+
+			</span>
+
+		</div>
+		<div>
+			<span class="label">供应商电话:</span>
+			<span class="inputControl">
+				<input class="textbox" type="text" id="supplyer_telephone_edit" name="supplyer_telephone" style="width:200px" />
+
+			</span>
+
+		</div>
+		<div>
+			<span class="label">联系人:</span>
+			<span class="inputControl">
+				<input class="textbox" type="text" id="supplyer_personName_edit" name="supplyer_personName" style="width:200px" />
+
+			</span>
+
+		</div>
+		<div>
+			<span class="label">供应商地址:</span>
+			<span class="inputControl">
+				<input class="textbox" type="text" id="supplyer_address_edit" name="supplyer_address" style="width:200px" />
+
+			</span>
+
+		</div>
+	</form>
+</div>
+<script>
+	var publicURL = "__PUBLIC__/";
+	var backURL = "__PUBLIC__/index.php/back/";
+</script>
+<script type="text/javascript" src="__PUBLIC__/backjs/supplyer/supplyer_manage.js"></script>
